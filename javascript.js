@@ -1,7 +1,7 @@
 let a = 0;
 let b = 0;
 let op;
-let state = 3; //initial calculator state
+let state = 3;
 const container = document.querySelector('#grid-container');
 const display = document.querySelector('#display');
 display.innerHTML = 0;
@@ -73,13 +73,13 @@ squares.forEach((square) => {
 
 function populate(input) {
     if (state === 1) {
-        display.innerHTML = input;
         state = 2;
+        display.innerHTML = input;
         return;
     }
     else if (state === 3) {
-        display.innerHTML = input;
         state = 0;
+        display.innerHTML = input;
         return;
     }
     display.innerHTML += input;
@@ -116,15 +116,24 @@ function equals() {
         return;
     }
     b = Number(display.innerHTML);
-    display.innerHTML = calc(a,b,op);
     state = 3;
+    display.innerHTML = calc(a,b,op);
 }
 
-function clear() {
-    display 
-    // clear button
-}
+clear = document.querySelector('#clear');
+clear.addEventListener('click', () => {
+    a = 0;
+    b = 0;
+    state = 3;
+    display.innerHTML = 0;
+});
 
-function backspace() {
-    // backspace button
-}
+backspace = document.querySelector('#backspace');
+backspace.addEventListener('click', () => {
+    if (display.innerHTML.length === 1) {
+        display.innerHTML = 0;
+    }
+    else {
+        display.innerHTML = display.innerHTML.slice(0,-1);
+    }
+});
