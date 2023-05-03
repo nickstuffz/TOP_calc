@@ -1,6 +1,6 @@
 let a = 0;
 let b = 0;
-let op;
+let op = 0;
 let state = 3;
 const container = document.querySelector('#grid-container');
 const display = document.querySelector('#display');
@@ -17,8 +17,11 @@ function multiply(a,b) {
 }
 function divide(a,b) {
     if (b === 0) {
-        alert("pls don't divide by 0");
-        return 0;
+        a = 0;
+        b = 0;
+        op = 0;
+        state = 3;
+        return("pls don't divide by zero you fool");
     };
     return a/b;
 }
@@ -50,14 +53,20 @@ const butt = ["1","4","7","0","2","5","8",".","3","6","9","=","/","x","-","+"];
 let i = 0;
 squares.forEach((square) => {
     square.innerHTML = butt[i];
-    square.setAttribute('id',butt[i]);
+    square.setAttribute('id', butt[i]);
+    if (square.id === "/" || 
+    square.id === "x" ||
+    square.id === "-" ||
+    square.id === "+") {
+        square.classList.add('operators');
+    }
+    else if (square.id === "=") {
+        square.classList.add('equals');
+    }
     i++;
     square.addEventListener('click', () => {
         if (square.id === "=") {
             equals();
-        }
-        else if (square.id === ".") {
-            decimal(square.id);
         }
         else if (square.id === "/" || 
                 square.id === "x" ||
@@ -72,7 +81,10 @@ squares.forEach((square) => {
 })
 
 function populate(input) {
-    if (state === 1) {
+    if (input === "." && display.innerHTML.includes(".")) {
+        return;
+    }
+    else if (state === 1) {
         state = 2;
         display.innerHTML = input;
         return;
@@ -103,11 +115,8 @@ function awp(input) {
     
 }
 
-function decimal () {
-
-}
 function equals() {
-    if (state === 1) {
+    if (state === 1 || op === 0) {
         return;
     }
     else if (state === 3) {
@@ -124,6 +133,7 @@ clear = document.querySelector('#clear');
 clear.addEventListener('click', () => {
     a = 0;
     b = 0;
+    op = 0;
     state = 3;
     display.innerHTML = 0;
 });

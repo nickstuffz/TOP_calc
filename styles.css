@@ -24,6 +24,23 @@ html {
     align-items: center;
 }
 
+.square:hover {
+    background-color: grey;
+}
+
+.square:active {
+    box-shadow: 0 5px #666;
+    transform: translateX(2px) translateY(2px);
+}
+
+.operators {
+    background-color: orange;
+}
+
+.equals {
+    background-color: aqua;
+}
+
 #extras-container {
     display: flex;
     width: 375px;
@@ -37,6 +54,13 @@ html {
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    background-color: tan;
+}
+
+.extra:active {
+    box-shadow: 0 5px #666;
+    transform: translateX(1px) translateY(1px);
+    background-color: maroon;
 }
 
 #display-container {
@@ -53,4 +77,5 @@ html {
     align-items: center;
     padding-right: 30px;
     border: 2px solid blue;
+    background-color: skyblue;
 }
